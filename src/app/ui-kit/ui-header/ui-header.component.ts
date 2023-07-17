@@ -1,0 +1,10 @@
+import { Component, Input } from '@angular/core';
+
+@Component({
+  selector: 'ui-header',
+  templateUrl: './ui-header.component.html',
+  styleUrls: ['./ui-header.component.scss'],
+})
+export class HeaderComponent {
+  @Input() user = '';
+}

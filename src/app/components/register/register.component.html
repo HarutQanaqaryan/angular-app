@@ -1,0 +1,56 @@
+<div class="login-user-page">
+  <div class="login-img_wrapper">
+    <img
+      src="../assets/main-img.svg"
+      class="login_img"
+      alt="background"
+      className="login_img"
+    />
+  </div>
+  <div class="login-user-authorization_block">
+    <img
+      alt="Company Icon"
+      src="../assets/main-logo.svg"
+      class="login-user-authorization_logo"
+    />
+    <form [formGroup]="form" (ngSubmit)="register()" class="form">
+      <ui-input
+        [uniqueStyle]="'login-authorization_input'"
+        placeholder="Type your first name"
+        label="FIRST NAME"
+        formControlName="firstname"
+      ></ui-input>
+      <ui-input
+        [uniqueStyle]="'login-authorization_input'"
+        placeholder="Type your last name"
+        label="LAST NAME"
+        formControlName="lastname"
+      ></ui-input>
+      <ui-input
+        [uniqueStyle]="'login-authorization_input'"
+        placeholder="Type your e-mail"
+        label="E-MAIL"
+        formControlName="email"
+      ></ui-input
+      ><ui-input
+        [uniqueStyle]="'login-authorization_input'"
+        placeholder="Type your password"
+        label="PASSWORD"
+        type="password"
+        formControlName="password"
+      ></ui-input>
+      <span class="error" *ngIf="errorMessage">{{
+        errorMessage | titlecase
+      }}</span>
+      <ui-button
+        [btnClass]="'login-user_btn'"
+        text="Login"
+        [isDisabled]="!form.valid"
+      ></ui-button>
+    </form>
+  </div>
+  <ui-loading *ngIf="loading" />
+</div>
+<div class="footer">
+  <img src="../assets/company-logo-lil.svg" alt="Company Logo" />
+</div>

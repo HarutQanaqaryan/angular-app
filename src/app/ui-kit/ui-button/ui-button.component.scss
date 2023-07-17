@@ -1,0 +1,108 @@
+.login-user_btn,
+.claims-head_btn,
+.claim-status_btn {
+  background: #7db59a;
+  width: 100%;
+  height: 52px;
+  padding: 8px 16px 8px 16px;
+  border-radius: 16px;
+  border: none;
+  color: #ffffff;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 36px;
+  letter-spacing: 0.25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  &:hover {
+    background: #5b9479;
+  }
+  &:active {
+    background: #4f896c;
+  }
+  &:disabled {
+    color: white;
+    cursor: default;
+    pointer-events: none;
+    background-color: rgb(185, 184, 184);
+  }
+  @media screen and (max-width: 800px) {
+    height: 48px;
+    font-size: 16px;
+  }
+}
+.login-user_btn {
+  margin-bottom: 10px;
+  @media screen and (max-width: 800px) {
+    max-width: 95vw;
+  }
+}
+.claims-head_btn {
+  width: 200px;
+}
+
+.create-new-claim {
+  display: flex;
+}
+.create-new-claim {
+  width: 86px;
+  height: 48px;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  letter-spacing: 0.25px;
+  color: #858585;
+  margin-right: 35px;
+  border-radius: 16px;
+  padding: 8px 16px;
+  cursor: pointer;
+}
+
+.cancel {
+  border: 1px solid #adadad;
+  background-color: transparent;
+  &:hover {
+    color: #7db59a;
+    border: 1px solid #7db59a;
+  }
+  &:active {
+    color: #4f896c;
+    border: 1px solid #4f896c;
+  }
+}
+.create {
+  background: #7db59a;
+  border: none;
+  color: white;
+  &:hover {
+    background: #5b9479;
+  }
+  &:active {
+    background: #4f896c;
+  }
+  @media screen and (max-width: 800px) {
+    display: inline-flex;
+  }
+}
+.create-mobile {
+  width: 48px;
+}
+.decline {
+  background: #e84393;
+  border: none;
+  color: white;
+  &:hover {
+    background: #b03671;
+  }
+  &:active {
+    background: #832552;
+  }
+}

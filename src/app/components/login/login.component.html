@@ -1,0 +1,60 @@
+<div class="login-user-page">
+  <div class="login-img_wrapper">
+    <img
+      src="../assets/main-img.svg"
+      class="login_img"
+      alt="background"
+      className="login_img"
+    />
+  </div>
+  <div class="login-user-authorization_block">
+    <img
+      alt="Company Icon"
+      src="../assets/main-logo.svg"
+      class="login-user-authorization_logo"
+    />
+    <form [formGroup]="form" (ngSubmit)="login()" class="form">
+      <ui-input
+        uniqueStyle="login-authorization_input"
+        label="E-MAIL"
+        placeholder="Type your e-mail"
+        icon="../assets/icons/icon-mail.svg"
+        formControlName="email"
+        type="email"
+        [isError]="email.errors?.pattern"
+        errorMessage="Mail should look like this: johnsmith@gmail.com"
+      ></ui-input>
+      <ui-input
+        uniqueStyle="login-authorization_input"
+        placeholder="Type your password"
+        label="PASSWORD"
+        icon="../assets/icons/icon-lock.svg"
+        formControlName="password"
+        type="password"
+        [isError]="password.errors?.pattern"
+        errorMessage="The password must be 6-18 characters long and only Latin letters"
+      ></ui-input>
+      <span class="error" *ngIf="errorMessage">{{
+        errorMessage | titlecase
+      }}</span>
+      <ui-button
+        btnClass="login-user_btn"
+        text="Login"
+        [isDisabled]="!form.valid"
+      ></ui-button>
+      <span className="login-user_request-register">
+        Not a member?
+        <a
+          class="login-user_request-register_link"
+          [routerLink]="['/register']"
+        >
+          Request registration
+        </a>
+      </span>
+    </form>
+    <ui-loading *ngIf="loading"></ui-loading>
+  </div>
+</div>
+<div class="footer">
+  <img src="../assets/company-logo-lil.svg" alt="Company Logo" />
+</div>
