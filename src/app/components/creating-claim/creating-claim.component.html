@@ -1,0 +1,47 @@
+<div class="modal">
+  <div class="modal-content">
+    <img
+      src="assets/close.svg"
+      (click)="onClose()"
+      class="modal-content_close"
+    />
+    <form [formGroup]="form" (ngSubmit)="onSave()" class="form">
+      <ui-input
+        placeholder=""
+        label="Title"
+        formControlName="title"
+        class="edit-input"
+      ></ui-input>
+      <ui-input
+        placeholder=""
+        label="Created"
+        formControlName="created"
+        class="edit-input"
+        type="date"
+        lang="en"
+      ></ui-input>
+      <ui-textarea
+        placeholder=""
+        label="Description"
+        formControlName="created"
+        class="edit-input"
+      ></ui-textarea>
+      <ui-select
+        [defaultValue]="form.value.type"
+        label="Type"
+        [options]="typeOptions"
+        [(currentSelection)]="_type"
+      ></ui-select>
+      <ui-select
+        [defaultValue]="form.value.status"
+        label="Status"
+        [options]="statusOptions"
+        [(currentSelection)]="_status"
+      ></ui-select>
+      <span class="error" *ngIf="errorMessage">{{
+        errorMessage | titlecase
+      }}</span>
+      <ui-button class="save-btn" text="Save"></ui-button>
+    </form>
+  </div>
+</div>

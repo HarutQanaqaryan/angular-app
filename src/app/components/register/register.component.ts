@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { RegisterService } from 'src/app/services/register.service';
+import { Router } from '@angular/router';
+import { RegisterService } from 'app/services/register.service';
 
 @Component({
   selector: 'register',
@@ -11,25 +12,16 @@ export class RegisterComponent {
   errorMessage = '';
   loading = false;
   form = new FormGroup({
-    email: new FormControl('', [
-      Validators.required,
-      // Validators.pattern(/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i),
-    ]),
-    password: new FormControl('', [
-      Validators.required,
-      // Validators.pattern(/^[a-zA-Z0-9_-]{6,18}$/i),
-    ]),
-    lastname: new FormControl('', [
-      Validators.required,
-      // Validators.pattern(/^[a-zA-Z0-9_-]{6,18}$/i),
-    ]),
-    firstname: new FormControl('', [
-      Validators.required,
-      // Validators.pattern(/^[a-zA-Z0-9_-]{6,18}$/i),
-    ]),
+    email: new FormControl('', [Validators.required]),
+    password: new FormControl('', [Validators.required]),
+    lastname: new FormControl('', [Validators.required]),
+    firstname: new FormControl('', [Validators.required]),
   });
 
-  constructor(private registerService: RegisterService) {}
+  constructor(
+    private registerService: RegisterService,
+    private router: Router
+  ) {}
   ngOnInit(): void {}
 
   get email() {
@@ -50,9 +42,9 @@ export class RegisterComponent {
         this.form.value.lastname as string
       )
       .subscribe(
-        (res) => {
+        () => {
           this.loading = false;
-          console.log(res);
+          this.router.navigateByUrl('/products');
         },
         (e: any) => {
           this.loading = false;

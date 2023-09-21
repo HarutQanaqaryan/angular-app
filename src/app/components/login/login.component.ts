@@ -1,31 +1,28 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { catchError } from 'rxjs';
-import { LoginService } from 'src/app/services/login.service';
+import { Router } from '@angular/router';
+import { LoginService } from 'app/services/login.service';
 
 @Component({
   selector: 'login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
+
 export class LoginComponent {
   errorMessage = '';
   loading = false;
   form = new FormGroup({
     email: new FormControl('', [
       Validators.required,
-      // Validators.pattern(/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i),
     ]),
     password: new FormControl('', [
       Validators.required,
-      // Validators.pattern(/^[a-zA-Z0-9_-]{6,18}$/i),
     ]),
   });
 
   constructor(
     private loginService: LoginService,
-    private route: ActivatedRoute,
     private router: Router
   ) {}
   ngOnInit(): void {}
@@ -49,7 +46,7 @@ export class LoginComponent {
         (res) => {
           this.loading = false;
           localStorage.setItem('token', JSON.stringify(res.token));
-          this.router.navigateByUrl('/home');
+          this.router.navigateByUrl('/products');
         },
         (e: any) => {
           this.loading = false;

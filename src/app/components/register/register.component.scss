@@ -1,39 +1,28 @@
-.login-user-page {
+.regiser-page {
   display: flex;
-  height: 89vh;
-  overflow: hidden;
-  @media screen and (max-width: 800px) {
-    width: 100vw;
-  }
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+  height: 100%;
 }
-.login-user-authorization_block {
+
+.register-block {
   display: flex;
   width: 50vw;
   justify-content: space-evenly;
   align-items: center;
   flex-direction: column;
-  padding: 70px 130px 110px 130px;
+  padding: 10px 130px 10px 130px;
   position: relative;
-  @media screen and (max-width: 800px) {
-    width: 100vw;
-    padding: 0%;
-    margin: 0px 16px 0px 16px;
-  }
+  margin: auto;
 }
 .login-user-authorization_logo {
   margin-bottom: 10px;
-  @media screen and (max-width: 800px) {
-    width: 100px;
-    max-width: 70%;
-  }
 }
 .login-user-authorization_form {
   width: 50vh;
   display: flex;
   flex-direction: column;
-  @media screen and (max-width: 800px) {
-    width: 100vw;
-  }
 }
 .login-user_request-register {
   font-style: normal;
@@ -42,36 +31,10 @@
   line-height: 17px;
   color: #2d3436;
   text-align: center;
-  @media screen and (max-width: 800px) {
-    font-size: 12px;
-    width: 100vw;
-  }
 }
 .login-user_request-register_link {
   text-decoration: none;
   color: blue;
-}
-
-.user-registered {
-  font-size: 18px;
-  color: #fff;
-  text-align: center;
-  margin-bottom: 20px;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  margin: auto;
-  width: fit-content;
-  height: fit-content;
-  z-index: 10;
-  background: #7db59a;
-  padding: 10px;
-  border-radius: 16px;
-  @media screen and (max-width: 800px) {
-    font-size: 12px;
-  }
 }
 
 .login-img_wrapper {
@@ -86,19 +49,6 @@
   width: 75%;
 }
 
-.footer {
-  background: #7db59a;
-  width: 100vw;
-  height: 100vh;
-  padding: 25px 0px 10px 30px;
-  @media screen and (max-width: 800px) {
-    height: 64px;
-  }
-  img {
-    width: 40px;
-  }
-}
-
 .error {
   color: red;
   display: flex;
@@ -109,4 +59,12 @@
 
 .form {
   width: 90%;
+}
+
+.register-input {
+  margin: 30px;
+}
+
+.register-btn {
+  margin: 10px;
 }

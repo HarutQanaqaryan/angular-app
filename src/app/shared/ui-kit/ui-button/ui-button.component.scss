@@ -1,0 +1,28 @@
+.btn {
+  background: #7db59a;
+  width: 100%;
+  padding: 8px 16px 8px 16px;
+  border-radius: 16px;
+  border: none;
+  color: #ffffff;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+  letter-spacing: 0.25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  &:hover {
+    background: #5b9479;
+  }
+  &:active {
+    background: #4f896c;
+  }
+  &:disabled {
+    color: white;
+    cursor: default;
+    pointer-events: none;
+    background-color: rgb(185, 184, 184);
+  }
+}

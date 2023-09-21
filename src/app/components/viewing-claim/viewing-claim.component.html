@@ -1,0 +1,28 @@
+<div class="modal">
+  <div class="modal-content">
+    <img
+      src="assets/close.svg"
+      (click)="onClose()"
+      class="modal-content_close"
+    />
+    <div class="current-claim">
+      <div>
+        <label class="label">Title</label>
+        <h1 class="data-title">{{ currentClaim?.title }}</h1>
+      </div>
+      <div>
+        <label class="label">Created</label>
+        <h2 class="data-date">{{ currentClaim?.created }}</h2>
+      </div>
+      <div>
+        <label class="label">Type</label>
+        <ui-type [type]="currentClaim?.type" />
+      </div>
+      <div>
+        <label class="label">Description</label>
+        <h2>{{ currentClaim?.description }}</h2>
+      </div>
+      <ui-status status="{{ currentClaim?.status }}" />
+    </div>
+  </div>
+</div>
