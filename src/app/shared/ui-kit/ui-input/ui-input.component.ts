@@ -21,6 +21,7 @@ export class InputComponent {
   @Input() errorMessage: string;
   @Input() placeholder: string;
   @Input() defaultValue?: string;
+  @Input() disabled?: boolean;
   @Input() type: string;
   @Input('class')
   class: string;

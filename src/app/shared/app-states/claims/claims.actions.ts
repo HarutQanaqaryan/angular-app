@@ -12,3 +12,8 @@ export const changeClaims = createAction(
   '[Claims Component] Change Claim',
   props<{ newClaim: IClaim[] }>()
 );
+
+export const loginUser = createAction(
+  '[Login Component] Login User',
+  props<{ login: string; password: string }>()
+);

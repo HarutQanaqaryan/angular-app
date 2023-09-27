@@ -1,12 +1,13 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store, select } from '@ngrx/store';
-import { ClaimType, IClaim, StatusType } from 'app/models';
+import { ClaimType, IClaim, IUser, RollesEnum, StatusType } from 'app/models';
 import {
   AppState,
   changeClaims,
   selectClaimsList,
   selectCurrentClaim,
+  selectCurrentUser,
   setCurrentClaim,
 } from 'app/shared';
 
@@ -19,7 +20,10 @@ export class EditingClaimComponent implements OnInit {
   @Output() close = new EventEmitter();
   currentClaim?: IClaim;
   claims: IClaim[];
+  currentUser?: IUser = void 0;
   errorMessage = '';
+  Rolles = RollesEnum;
+  isAbleToEdit: boolean = false;
 
   typeOptions = [
     ClaimType.Hardware,
@@ -40,9 +44,13 @@ export class EditingClaimComponent implements OnInit {
     created: new FormControl(this.currentClaim?.created, [Validators.required]),
     type: new FormControl(this.currentClaim?.type, [Validators.required]),
     status: new FormControl(this.currentClaim?.status, [Validators.required]),
+    description: new FormControl(this.currentClaim?.description, [
+      Validators.required,
+    ]),
   });
   _status: any = '';
   _type: any = '';
+  _desc: any = '';
 
   constructor(private store: Store<AppState>) {
     this.store.pipe(select(selectCurrentClaim)).subscribe((value) => {
@@ -51,6 +59,9 @@ export class EditingClaimComponent implements OnInit {
     this.store
       .pipe(select(selectClaimsList))
       .subscribe((value) => (this.claims = value));
+    this.store
+      .pipe(select(selectCurrentUser))
+      .subscribe((value) => (this.currentUser = value));
   }
 
   ngOnInit(): void {
@@ -59,7 +70,11 @@ export class EditingClaimComponent implements OnInit {
       created: this.currentClaim?.created,
       type: this.currentClaim?.type,
       status: this.currentClaim?.status,
+      description: this.currentClaim?.description,
     });
+    this.isAbleToEdit =
+      this.currentClaim?.creator === this.currentUser?.login &&
+      this.currentClaim?.status === StatusType.New;
   }
 
   onClose() {
@@ -72,12 +87,13 @@ export class EditingClaimComponent implements OnInit {
         return {
           ...el,
           status: this._status || el.status,
+          description: this.form.value.description || el.description,
         };
       } else {
         return el;
       }
     });
     this.store.dispatch(changeClaims({ newClaim: updatedClaim as IClaim[] }));
-    this.onClose()
+    this.onClose();
   }
 }

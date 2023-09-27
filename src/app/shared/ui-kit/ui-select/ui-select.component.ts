@@ -26,6 +26,7 @@ export class SelectComponent implements OnInit {
   @Input() defaultValue?: any;
   @Input() type: string;
   @Input() options: string[];
+  @Input() disabled?: boolean;
   isOptions: boolean = false;
   @Output() currentSelectionChange = new EventEmitter<any>();
   _currentSelection: any;

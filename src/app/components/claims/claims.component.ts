@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { Store, select } from '@ngrx/store';
-import { IClaim } from 'app/models';
+import { IClaim, IUser, RollesEnum, StatusType } from 'app/models';
 import {
   AppState,
   clearCurrentClaim,
   selectClaimsList,
+  selectCurrentUser,
   setCurrentClaim,
 } from 'app/shared/app-states';
 
@@ -40,14 +42,25 @@ export class ClaimsComponent {
   isEditingClaim: boolean;
   isDeletingClaim: boolean;
   isCreatingClaim: boolean;
+  currentUser?: IUser = void 0;
   ActionTypes = ActionTypes;
+  Rolles = RollesEnum;
+  StatusType = StatusType;
 
-  constructor(private store: Store<AppState>) {
+  constructor(private store: Store<AppState>, private router: Router) {
     this.store
       .pipe(select(selectClaimsList))
       .subscribe((value) => (this.claims = value));
+    this.store
+      .pipe(select(selectCurrentUser))
+      .subscribe((value) => (this.currentUser = value));
   }
 
+  ngOnInit(): void {
+    if (!this.currentUser) {
+      this.router.navigateByUrl('/login');
+    }
+  }
   setCurrentClaim(claim: IClaim, action: ActionTypes) {
     this.store.dispatch(setCurrentClaim({ currentClaim: claim }));
     switch (action) {
@@ -81,6 +94,18 @@ export class ClaimsComponent {
     }
   }
 
+  isAbleToEditStatus(status: StatusType, creator: string) {
+    if (this.currentUser?.login === creator && status === StatusType.New) {
+      return true;
+    } else if (
+      this.currentUser?.role.includes(this.Rolles.ADMIN) &&
+      !(status === StatusType.Declined || status === StatusType.Done)
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  }
   searchClaim(e: Event, element: IColumn): void {
     const searchValue = (e.target as HTMLInputElement).value;
     type ObjectKey = keyof typeof element;

@@ -7,7 +7,6 @@ import {
   changeClaims,
   selectClaimsList,
   selectCurrentClaim,
-  setCurrentClaim,
 } from 'app/shared';
 
 @Component({

@@ -7,6 +7,7 @@
       [(ngModel)]="input"
       (ngModelChange)="onChange($event)"
       autoComplete="on"
+      [disabled]="!!disabled"
     ></textarea>
     <img *ngIf="icon" src="{{ icon }}" alt="icon" class="text-field-icon" />
   </div>

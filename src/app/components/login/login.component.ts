@@ -1,30 +1,37 @@
 import { Component, Inject } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { LoginService } from 'app/services/login.service';
+import { Store, select } from '@ngrx/store';
+import { IUser } from 'app/models';
+import {
+  AppState,
+  loginUser,
+  selectCurrentUser,
+  selectUserError,
+} from 'app/shared';
 
 @Component({
   selector: 'login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
-
 export class LoginComponent {
-  errorMessage = '';
+  errorMessage?: string;
+  currentUser?: IUser;
   loading = false;
   form = new FormGroup({
-    email: new FormControl('', [
-      Validators.required,
-    ]),
-    password: new FormControl('', [
-      Validators.required,
-    ]),
+    email: new FormControl('', [Validators.required]),
+    password: new FormControl('', [Validators.required]),
   });
 
-  constructor(
-    private loginService: LoginService,
-    private router: Router
-  ) {}
+  constructor(private store: Store<AppState>, private router: Router) {
+    this.store.pipe(select(selectCurrentUser)).subscribe((value) => {
+      this.currentUser = value;
+    });
+    this.store
+      .pipe(select(selectUserError))
+      .subscribe((value) => (this.errorMessage = value));
+  }
   ngOnInit(): void {}
 
   get email() {
@@ -36,22 +43,15 @@ export class LoginComponent {
   }
 
   login() {
-    this.loading = true;
-    this.loginService
-      .postLogin(
-        this.form.value.email as string,
-        this.form.value.password as string
-      )
-      .subscribe(
-        (res) => {
-          this.loading = false;
-          localStorage.setItem('token', JSON.stringify(res.token));
-          this.router.navigateByUrl('/products');
-        },
-        (e: any) => {
-          this.loading = false;
-          this.errorMessage = e.error;
-        }
-      );
+    this.store.dispatch(
+      loginUser({
+        login: this.form.value.email as string,
+        password: this.form.value.password as string,
+      })
+    );
+    if(this.errorMessage){
+      return
+    }
+    this.router.navigateByUrl('/claims');
   }
 }

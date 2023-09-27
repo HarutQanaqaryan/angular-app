@@ -20,6 +20,7 @@ export interface IClaim {
   status: StatusType;
   actions: string;
   description: string;
+  creator: string;
 }
 
 export interface ClaimsState {

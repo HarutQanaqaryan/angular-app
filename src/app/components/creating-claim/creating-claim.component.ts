@@ -1,12 +1,13 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store, select } from '@ngrx/store';
-import { ClaimType, IClaim, StatusType } from 'app/models';
+import { ClaimType, IClaim, IUser, StatusType } from 'app/models';
 import {
   AppState,
   changeClaims,
   selectClaimsList,
   selectCurrentClaim,
+  selectCurrentUser,
   setCurrentClaim,
 } from 'app/shared';
 
@@ -18,6 +19,7 @@ import {
 export class CreatingClaimComponent {
   @Output() close = new EventEmitter();
   claims: IClaim[];
+  currentUser?: IUser = void 0;
   errorMessage = '';
 
   typeOptions = [
@@ -34,6 +36,7 @@ export class CreatingClaimComponent {
     created: new FormControl('', [Validators.required]),
     type: new FormControl('', [Validators.required]),
     status: new FormControl('', [Validators.required]),
+    description: new FormControl('', [Validators.required]),
   });
   _status: any = '';
   _type: any = '';
@@ -42,6 +45,9 @@ export class CreatingClaimComponent {
     this.store
       .pipe(select(selectClaimsList))
       .subscribe((value) => (this.claims = value));
+      this.store
+      .pipe(select(selectCurrentUser))
+      .subscribe((value) => (this.currentUser = value));
   }
 
   onClose() {
@@ -58,6 +64,7 @@ export class CreatingClaimComponent {
         type: this._type,
         status: this._status,
         description: 'desc',
+        creator: this.currentUser?.login
       },
     ];
     this.store.dispatch(changeClaims({ newClaim: updatedClaim as IClaim[] }));

@@ -6,7 +6,8 @@
       text="Cleate claim"
       iconSrc="assets/icon-plus.svg"
       width="150px"
-      (click)='isCreatingClaim = !isCreatingClaim'
+      (click)="isCreatingClaim = !isCreatingClaim"
+      [isDisabled]="!currentUser?.role?.includes(Rolles.CREATOR)"
     ></ui-button>
   </div>
   <div class="table-wrapper">
@@ -47,14 +48,20 @@
                 <img
                   src="assets/pencil.svg"
                   (click)="setCurrentClaim(row, ActionTypes.EDIT)"
+                  *ngIf="isAbleToEditStatus(row.status, row.creator)"
                 />
                 <img
                   src="assets/view.svg"
                   (click)="setCurrentClaim(row, ActionTypes.VIEW)"
+                  *ngIf="currentUser?.role?.includes(Rolles.VIEWER)"
                 />
                 <img
                   src="assets/remove.svg"
                   (click)="setCurrentClaim(row, ActionTypes.REMOVE)"
+                  *ngIf="
+                    currentUser?.login === row.creator &&
+                    row.status === StatusType.New
+                  "
                 />
               </div>
             </td>
@@ -66,5 +73,11 @@
 </div>
 <viewing-modal *ngIf="isViewingClaim" (close)="closeModal(ActionTypes.VIEW)" />
 <editing-modal *ngIf="isEditingClaim" (close)="closeModal(ActionTypes.EDIT)" />
-<creating-modal *ngIf="isCreatingClaim" (close)="closeModal(ActionTypes.CREATING)" />
-<deleting-claim *ngIf="isDeletingClaim" (close)="closeModal(ActionTypes.REMOVE)" />
+<creating-modal
+  *ngIf="isCreatingClaim"
+  (close)="closeModal(ActionTypes.CREATING)"
+/>
+<deleting-claim
+  *ngIf="isDeletingClaim"
+  (close)="closeModal(ActionTypes.REMOVE)"
+/>
