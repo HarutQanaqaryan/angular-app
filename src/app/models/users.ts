@@ -13,6 +13,7 @@ export interface IUser {
 }
 
 export interface UserState {
+  isSignIn?: boolean;
   user?: IUser;
   error?: string;
 }

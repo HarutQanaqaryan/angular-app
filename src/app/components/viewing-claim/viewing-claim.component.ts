@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { IClaim } from 'app/models';
-import { AppState, selectCurrentClaim } from 'app/shared';
+import { AppState, selectCurrentClaim } from 'app/states';
 
 @Component({
   selector: 'viewing-modal',

@@ -4,16 +4,16 @@
     src="assets/main-logo.svg"
     class="login-user-authorization_logo"
   />
-  <form [formGroup]="form" (ngSubmit)="login()" class="form">
+  <form [formGroup]="form" (ngSubmit)="signIn()" class="form">
     <ui-input
-      label="E-MAIL"
+      label="Login"
       placeholder="Type your e-mail"
       icon="../assets/icon-mail.svg"
-      formControlName="email"
+      formControlName="login"
       type="email"
-      [isError]="email.errors?.pattern"
+      [isError]="submitted && login.errors?.required"
       class="login-input"
-      errorMessage="Mail should look like this: johnsmith@gmail.com"
+      errorMessage="Required field"
     />
     <ui-input
       placeholder="Type your password"
@@ -21,14 +21,17 @@
       icon="../assets/icon-lock.svg"
       formControlName="password"
       type="password"
-      [isError]="password.errors?.pattern"
+      [isError]="submitted && password.errors?.required"
       class="login-input"
-      errorMessage="The password must be 6-18 characters long and only Latin letters"
+      errorMessage="Required field"
     />
-    <span class="error" *ngIf="errorMessage">{{
-      errorMessage
-    }}</span>
-    <ui-button text="Login" class="login-btn" />
+    <span class="error" *ngIf="errorMessage">{{ errorMessage }}</span>
+    <ui-button
+      type="submit"
+      text="Login"
+      class="login-btn"
+      [isDisabled]="!form.valid"
+    />
   </form>
   <span className="login-user_request-register">
     Not a member?
@@ -38,4 +41,3 @@
   </span>
 </div>
 <ui-loading *ngIf="loading"></ui-loading>
-<ui-footer />

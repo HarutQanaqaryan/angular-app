@@ -1,13 +1,12 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store, select } from '@ngrx/store';
-import { ClaimType, IClaim, StatusType } from 'app/models';
+import { IClaim } from 'app/models';
 import {
   AppState,
   changeClaims,
   selectClaimsList,
   selectCurrentClaim,
-} from 'app/shared';
+} from 'app/states';
 
 @Component({
   selector: 'deleting-claim',
@@ -16,7 +15,7 @@ import {
 })
 export class DeletingClaimComponent {
   @Output() close = new EventEmitter();
-  claims: IClaim[];
+  claims?: IClaim[];
   currentClaim?: IClaim;
 
   constructor(private store: Store<AppState>) {
@@ -33,7 +32,7 @@ export class DeletingClaimComponent {
   }
 
   onDelete() {
-    const updatedClaim = this.claims.filter(
+    const updatedClaim = this.claims?.filter(
       (el) => this.currentClaim?.id !== el.id
     );
     this.store.dispatch(changeClaims({ newClaim: updatedClaim as IClaim[] }));

@@ -68,3 +68,34 @@
 .register-btn {
   margin: 10px;
 }
+
+.registered-modal {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  margin: auto;
+  z-index: 11;
+  background-color: #2d343642;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.registered-message {
+  background: #5b9479;
+  padding: 50px;
+  font-size: 20px;
+  border-radius: 26px;
+  color: #ffffff;
+}
+
+.error {
+  color: #cc1f1f;
+  font-family: 16px;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 32px;
+  margin: 4px;
+}

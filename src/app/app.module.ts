@@ -7,20 +7,21 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {
   ButtonComponent,
-  FooterComponent,
-  HeaderComponent,
   InputComponent,
   LoadingComponent,
   NavbarComponent,
   SelectComponent,
   StatusComponent,
   TypeComponent,
-  reducers,
 } from './shared';
+import { reducers } from './states';
 import {
   ClaimsComponent,
   EditingClaimComponent,
+  FooterComponent,
+  HeaderComponent,
   LoginComponent,
+  NotFoundComponent,
   RegisterComponent,
   ViewingClaimComponent,
 } from './components';
@@ -28,6 +29,7 @@ import { StoreModule } from '@ngrx/store';
 import { CreatingClaimComponent } from './components/creating-claim';
 import { TextareaComponent } from './shared/ui-kit/ui-textarea';
 import { DeletingClaimComponent } from './components/deleting-claim';
+import { LayoutComponent } from './components/layout';
 
 @NgModule({
   declarations: [
@@ -49,6 +51,8 @@ import { DeletingClaimComponent } from './components/deleting-claim';
     CreatingClaimComponent,
     TextareaComponent,
     DeletingClaimComponent,
+    LayoutComponent,
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,

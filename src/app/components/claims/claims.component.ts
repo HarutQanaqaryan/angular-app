@@ -1,43 +1,23 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
 import { Store, select } from '@ngrx/store';
-import { IClaim, IUser, RollesEnum, StatusType } from 'app/models';
+import { ActionTypes, IClaim, IColumn, IUser, RollesEnum, StatusType } from 'app/models';
+import { ClaimsService } from 'app/services/claims.service';
+import { tableColumns } from 'app/shared';
 import {
   AppState,
   clearCurrentClaim,
   selectClaimsList,
   selectCurrentUser,
   setCurrentClaim,
-} from 'app/shared/app-states';
-
-interface IColumn {
-  title: string;
-  type?: string;
-}
-
-enum ActionTypes {
-  REMOVE = 'REMOVE',
-  VIEW = 'VIEW',
-  EDIT = 'EDIT',
-  CREATING = 'CREATING',
-  IS_DELETING = 'IS_DELETING',
-}
-
-const defaultColumns = [
-  { title: 'Title', type: 'title' },
-  { title: 'Created', type: 'created' },
-  { title: 'Type', type: 'type' },
-  { title: 'Status', type: 'status' },
-  { title: 'Actions' },
-];
+} from 'app/states';
 @Component({
   selector: 'claims',
   templateUrl: './claims.component.html',
   styleUrls: ['./claims.component.scss'],
 })
 export class ClaimsComponent {
-  columns: IColumn[] = defaultColumns;
-  claims: IClaim[];
+  columns: IColumn[] = tableColumns;
+  claims?: IClaim[];
   isViewingClaim: boolean;
   isEditingClaim: boolean;
   isDeletingClaim: boolean;
@@ -47,7 +27,10 @@ export class ClaimsComponent {
   Rolles = RollesEnum;
   StatusType = StatusType;
 
-  constructor(private store: Store<AppState>, private router: Router) {
+  constructor(
+    private store: Store<AppState>,
+    private claimsService: ClaimsService
+  ) {
     this.store
       .pipe(select(selectClaimsList))
       .subscribe((value) => (this.claims = value));
@@ -56,11 +39,10 @@ export class ClaimsComponent {
       .subscribe((value) => (this.currentUser = value));
   }
 
-  ngOnInit(): void {
-    if (!this.currentUser) {
-      this.router.navigateByUrl('/login');
-    }
+  ngOnInit() {
+    this.claimsService.getAllClaims();
   }
+
   setCurrentClaim(claim: IClaim, action: ActionTypes) {
     this.store.dispatch(setCurrentClaim({ currentClaim: claim }));
     switch (action) {
@@ -107,18 +89,6 @@ export class ClaimsComponent {
     }
   }
   searchClaim(e: Event, element: IColumn): void {
-    const searchValue = (e.target as HTMLInputElement).value;
-    type ObjectKey = keyof typeof element;
-    const currentType = element.type as ObjectKey;
-    this.store
-      .pipe(select(selectClaimsList))
-      .subscribe(
-        (value) =>
-          (this.claims = value.filter((claim) =>
-            claim[currentType]
-              .toLowerCase()
-              .includes((searchValue as string).toLowerCase())
-          ))
-      );
+    this.claims = this.claimsService.searchClaim(e, element);
   }
 }

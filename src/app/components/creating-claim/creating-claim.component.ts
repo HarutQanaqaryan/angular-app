@@ -2,6 +2,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store, select } from '@ngrx/store';
 import { ClaimType, IClaim, IUser, StatusType } from 'app/models';
+import { ClaimsService } from 'app/services/claims.service';
 import {
   AppState,
   changeClaims,
@@ -9,7 +10,7 @@ import {
   selectCurrentClaim,
   selectCurrentUser,
   setCurrentClaim,
-} from 'app/shared';
+} from 'app/states';
 
 @Component({
   selector: 'creating-modal',
@@ -18,7 +19,7 @@ import {
 })
 export class CreatingClaimComponent {
   @Output() close = new EventEmitter();
-  claims: IClaim[];
+  claims?: IClaim[];
   currentUser?: IUser = void 0;
   errorMessage = '';
 
@@ -41,11 +42,14 @@ export class CreatingClaimComponent {
   _status: any = '';
   _type: any = '';
 
-  constructor(private store: Store<AppState>) {
+  constructor(
+    private store: Store<AppState>,
+    private claimsService: ClaimsService
+  ) {
     this.store
       .pipe(select(selectClaimsList))
       .subscribe((value) => (this.claims = value));
-      this.store
+    this.store
       .pipe(select(selectCurrentUser))
       .subscribe((value) => (this.currentUser = value));
   }
@@ -55,19 +59,14 @@ export class CreatingClaimComponent {
   }
 
   onSave() {
-    const updatedClaim = [
-      ...this.claims,
-      {
-        id: Math.random(),
-        title: this.form.value.title,
-        created: this.form.value.created,
-        type: this._type,
-        status: this._status,
-        description: 'desc',
-        creator: this.currentUser?.login
-      },
-    ];
-    this.store.dispatch(changeClaims({ newClaim: updatedClaim as IClaim[] }));
-    this.onClose();
-  }
+      this.claimsService.createClaim(
+        this.form.value.title!,
+        this.form.value.created!,
+        this._type,
+        this._status,
+        this.currentUser?.login!,
+        this.form.value.description!
+      );
+      this.onClose();
+    }
 }

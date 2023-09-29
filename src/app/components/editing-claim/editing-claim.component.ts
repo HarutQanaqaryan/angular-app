@@ -2,14 +2,14 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store, select } from '@ngrx/store';
 import { ClaimType, IClaim, IUser, RollesEnum, StatusType } from 'app/models';
+import { ClaimsService } from 'app/services/claims.service';
 import {
   AppState,
   changeClaims,
   selectClaimsList,
   selectCurrentClaim,
   selectCurrentUser,
-  setCurrentClaim,
-} from 'app/shared';
+} from 'app/states';
 
 @Component({
   selector: 'editing-modal',
@@ -19,7 +19,7 @@ import {
 export class EditingClaimComponent implements OnInit {
   @Output() close = new EventEmitter();
   currentClaim?: IClaim;
-  claims: IClaim[];
+  claims?: IClaim[];
   currentUser?: IUser = void 0;
   errorMessage = '';
   Rolles = RollesEnum;
@@ -52,7 +52,10 @@ export class EditingClaimComponent implements OnInit {
   _type: any = '';
   _desc: any = '';
 
-  constructor(private store: Store<AppState>) {
+  constructor(
+    private store: Store<AppState>,
+    private claimsService: ClaimsService
+  ) {
     this.store.pipe(select(selectCurrentClaim)).subscribe((value) => {
       this.currentClaim = value;
     });
@@ -82,18 +85,11 @@ export class EditingClaimComponent implements OnInit {
   }
 
   onSave() {
-    const updatedClaim = this.claims.map((el) => {
-      if (this.currentClaim?.id === el.id) {
-        return {
-          ...el,
-          status: this._status || el.status,
-          description: this.form.value.description || el.description,
-        };
-      } else {
-        return el;
-      }
-    });
-    this.store.dispatch(changeClaims({ newClaim: updatedClaim as IClaim[] }));
+    this.claimsService.editingClaim(
+      this.currentClaim!,
+      this._status,
+      this.form.value.description!
+    );
     this.onClose();
   }
 }

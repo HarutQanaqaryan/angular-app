@@ -24,6 +24,19 @@ export interface IClaim {
 }
 
 export interface ClaimsState {
-  claims: IClaim[];
+  claims?: IClaim[];
   currentClaim?: IClaim;
+}
+
+export interface IColumn {
+  title: string;
+  type?: string;
+}
+
+export enum ActionTypes {
+  REMOVE = 'REMOVE',
+  VIEW = 'VIEW',
+  EDIT = 'EDIT',
+  CREATING = 'CREATING',
+  IS_DELETING = 'IS_DELETING',
 }

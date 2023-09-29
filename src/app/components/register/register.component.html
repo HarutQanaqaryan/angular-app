@@ -6,12 +6,12 @@
       class="login-user-authorization_logo"
     />
     <form [formGroup]="form" (ngSubmit)="register()" class="form">
-        <ui-input
-          placeholder="Type your first name"
-          label="FIRST NAME"
-          formControlName="firstname"
-          class="register-input"
-        ></ui-input>
+      <ui-input
+        placeholder="Type your first name"
+        label="FIRST NAME"
+        formControlName="firstname"
+        class="register-input"
+      ></ui-input>
       <ui-input
         placeholder="Type your last name"
         label="LAST NAME"
@@ -20,8 +20,8 @@
       ></ui-input>
       <ui-input
         placeholder="Type your e-mail"
-        label="E-MAIL"
-        formControlName="email"
+        label="Login"
+        formControlName="login"
         class="register-input"
       ></ui-input
       ><ui-input
@@ -31,9 +31,9 @@
         formControlName="password"
         class="register-input"
       ></ui-input>
-      <span class="error" *ngIf="errorMessage">{{
-        errorMessage | titlecase
-      }}</span>
+      <div class="error" *ngIf="isUserAlreadyExist">
+        This login is already in use
+      </div>
       <ui-button
         class="register-btn"
         text="Login"
@@ -42,5 +42,7 @@
     </form>
   </div>
   <ui-loading *ngIf="loading" />
-  <ui-footer />
+  <div *ngIf="isRegistered" class="registered-modal">
+    <span class="registered-message">You are registered</span>
+  </div>
 </div>

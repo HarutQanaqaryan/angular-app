@@ -1,6 +1,4 @@
 export * from './ui-button';
-export * from './ui-footer';
-export * from './ui-header';
 export * from './ui-input';
 export * from './ui-loading';
 export * from './ui-navbar';
