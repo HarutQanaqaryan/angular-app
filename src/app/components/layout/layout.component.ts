@@ -1,5 +1,4 @@
-import { Component, Input } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { AppState, selectCurrentUser } from 'app/states';
 

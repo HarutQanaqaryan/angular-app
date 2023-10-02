@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 import {
-  changeClaims,
+  editingClaims,
   clearCurrentClaim,
   setClaims,
   setCurrentClaim,
@@ -26,8 +26,8 @@ export const claimsReducer = createReducer(
     ...state,
     currentClaim: void 0,
   })),
-  on(changeClaims, (state, { newClaim }) => ({
+  on(editingClaims, (state, { claims }) => ({
     ...state,
-    claims: newClaim,
+    claims: claims,
   }))
 );

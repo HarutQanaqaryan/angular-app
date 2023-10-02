@@ -1,16 +1,15 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Store, select } from '@ngrx/store';
-import { ClaimType, IClaim, IUser, StatusType } from 'app/models';
-import { ClaimsService } from 'app/services/claims.service';
+import { DatePipe } from '@angular/common';
+import { Component, EventEmitter, Output } from '@angular/core';
 import {
-  AppState,
-  changeClaims,
-  selectClaimsList,
-  selectCurrentClaim,
-  selectCurrentUser,
-  setCurrentClaim,
-} from 'app/states';
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
+import { Store, select } from '@ngrx/store';
+import { ActionTypes, ClaimType, IClaim, IUser, StatusType } from 'app/models';
+import { ClaimsService } from 'app/services/claims.service';
+import { AppState, selectClaimsList, selectCurrentUser } from 'app/states';
 
 @Component({
   selector: 'creating-modal',
@@ -34,17 +33,16 @@ export class CreatingClaimComponent {
   loading = false;
   form = new FormGroup({
     title: new FormControl('', [Validators.required]),
-    created: new FormControl('', [Validators.required]),
     type: new FormControl('', [Validators.required]),
-    status: new FormControl('', [Validators.required]),
     description: new FormControl('', [Validators.required]),
   });
-  _status: any = '';
   _type: any = '';
 
   constructor(
     private store: Store<AppState>,
-    private claimsService: ClaimsService
+    private claimsService: ClaimsService,
+    public datepipe: DatePipe,
+    public creatingForm: FormBuilder
   ) {
     this.store
       .pipe(select(selectClaimsList))
@@ -58,15 +56,18 @@ export class CreatingClaimComponent {
     this.close.emit();
   }
 
+  setType(value: any) {
+    this.form.controls['type'].setValue(value);
+  }
+
   onSave() {
-      this.claimsService.createClaim(
-        this.form.value.title!,
-        this.form.value.created!,
-        this._type,
-        this._status,
-        this.currentUser?.login!,
-        this.form.value.description!
-      );
-      this.onClose();
-    }
+    this.claimsService.createClaim(
+      this.form.value.title as string,
+      this.datepipe.transform(new Date(), 'yyyy-MM-dd'),
+      this.form.value.type as ActionTypes,
+      this.currentUser?.login as string,
+      this.form.value.description as string
+    );
+    this.onClose();
+  }
 }

@@ -57,6 +57,7 @@ export class AuthService {
   logout() {
     this.store.dispatch(logout());
     this.router.navigateByUrl('/login');
+    localStorage.removeItem('USER');
     this.isSignIn = false;
   }
 }

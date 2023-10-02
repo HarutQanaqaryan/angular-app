@@ -13,7 +13,7 @@ export const setCurrentClaim = createAction(
 
 export const clearCurrentClaim = createAction('[Claims Component] Clear Claim');
 
-export const changeClaims = createAction(
+export const editingClaims = createAction(
   '[Claims Component] Change Claim',
-  props<{ newClaim: IClaim[] }>()
+  props<{ claims: IClaim[] }>()
 );

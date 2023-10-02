@@ -30,6 +30,8 @@ import { CreatingClaimComponent } from './components/creating-claim';
 import { TextareaComponent } from './shared/ui-kit/ui-textarea';
 import { DeletingClaimComponent } from './components/deleting-claim';
 import { LayoutComponent } from './components/layout';
+import { DatePipe } from '@angular/common';
+import { ModalComponent } from './shared/ui-kit/ui-modal/ui-modal.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +55,7 @@ import { LayoutComponent } from './components/layout';
     DeletingClaimComponent,
     LayoutComponent,
     NotFoundComponent,
+    ModalComponent,
   ],
   imports: [
     BrowserModule,
@@ -62,7 +65,7 @@ import { LayoutComponent } from './components/layout';
     HttpClientModule,
     StoreModule.forRoot(reducers, {}),
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

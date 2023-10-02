@@ -5,7 +5,6 @@ import { ClaimType, IClaim, IUser, RollesEnum, StatusType } from 'app/models';
 import { ClaimsService } from 'app/services/claims.service';
 import {
   AppState,
-  changeClaims,
   selectClaimsList,
   selectCurrentClaim,
   selectCurrentUser,
@@ -48,9 +47,6 @@ export class EditingClaimComponent implements OnInit {
       Validators.required,
     ]),
   });
-  _status: any = '';
-  _type: any = '';
-  _desc: any = '';
 
   constructor(
     private store: Store<AppState>,
@@ -84,11 +80,15 @@ export class EditingClaimComponent implements OnInit {
     this.close.emit();
   }
 
+  setStatus(value: StatusType) {
+    this.form.controls['status'].setValue(value);
+  }
+
   onSave() {
     this.claimsService.editingClaim(
-      this.currentClaim!,
-      this._status,
-      this.form.value.description!
+      this.currentClaim as IClaim,
+      this.form.value.status as StatusType,
+      this.form.value.description as string
     );
     this.onClose();
   }

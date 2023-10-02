@@ -3,7 +3,7 @@ import { ClaimType, IClaim, StatusType } from 'app/models';
 export const mockData: IClaim[] = [
   {
     id: 1,
-    title: 'Hydrogen',
+    title: 'Task 1',
     created: '2023-09-13',
     type: ClaimType.Hardware,
     status: StatusType.Declined,
@@ -14,7 +14,7 @@ export const mockData: IClaim[] = [
   },
   {
     id: 2,
-    title: 'Helium',
+    title: 'Task 2',
     created: '2023-09-13',
     type: ClaimType.Hardware,
     status: StatusType.Declined,
@@ -25,7 +25,7 @@ export const mockData: IClaim[] = [
   },
   {
     id: 3,
-    title: 'Lithium',
+    title: 'Task 3',
     created: '2023-09-13',
     type: ClaimType.Hardware,
     status: StatusType.Done,
@@ -36,7 +36,7 @@ export const mockData: IClaim[] = [
   },
   {
     id: 4,
-    title: 'Beryllium',
+    title: 'Task 4',
     created: '2023-09-13',
     type: ClaimType.Sofware,
     status: StatusType.Done,
@@ -47,7 +47,7 @@ export const mockData: IClaim[] = [
   },
   {
     id: 5,
-    title: 'Boron',
+    title: 'Task 5',
     created: '2023-09-13',
     type: ClaimType.Sofware,
     status: StatusType.New,
@@ -58,7 +58,7 @@ export const mockData: IClaim[] = [
   },
   {
     id: 6,
-    title: 'Carbon',
+    title: 'Task 6',
     created: '2023-09-13',
     type: ClaimType.Troubleshooting,
     status: StatusType.New,
@@ -69,7 +69,7 @@ export const mockData: IClaim[] = [
   },
   {
     id: 7,
-    title: 'Nitrogen',
+    title: 'Task 7',
     created: '2023-09-13',
     type: ClaimType.Networking,
     status: StatusType.In_Progres,

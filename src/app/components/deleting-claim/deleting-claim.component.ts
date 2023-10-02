@@ -1,9 +1,10 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { IClaim } from 'app/models';
+import { ClaimsService } from 'app/services/claims.service';
 import {
   AppState,
-  changeClaims,
+  editingClaims,
   selectClaimsList,
   selectCurrentClaim,
 } from 'app/states';
@@ -18,7 +19,10 @@ export class DeletingClaimComponent {
   claims?: IClaim[];
   currentClaim?: IClaim;
 
-  constructor(private store: Store<AppState>) {
+  constructor(
+    private store: Store<AppState>,
+    private claimsService: ClaimsService
+  ) {
     this.store.pipe(select(selectCurrentClaim)).subscribe((value) => {
       this.currentClaim = value;
     });
@@ -32,10 +36,7 @@ export class DeletingClaimComponent {
   }
 
   onDelete() {
-    const updatedClaim = this.claims?.filter(
-      (el) => this.currentClaim?.id !== el.id
-    );
-    this.store.dispatch(changeClaims({ newClaim: updatedClaim as IClaim[] }));
+    this.claimsService.deletingClaims(this.currentClaim);
     this.onClose();
   }
 }

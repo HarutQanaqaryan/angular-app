@@ -4,6 +4,6 @@
   [disabled]="isDisabled"
   [style.width]="width"
 >
-  <img *ngIf="iconSrc" src="{{ iconSrc }}" alt="Icon" />
+  <img *ngIf="iconSrc" [src]="iconSrc" alt="Icon" />
   {{ text }}
 </button>

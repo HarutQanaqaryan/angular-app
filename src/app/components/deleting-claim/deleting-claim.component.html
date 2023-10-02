@@ -1,14 +1,7 @@
-<div class="modal">
-  <div class="modal-content">
-    <img
-      src="assets/close.svg"
-      (click)="onClose()"
-      class="modal-content_close"
-    />
-    <h4>Do you really want to delete claim?</h4>
-    <div class="delete-actions">
-      <ui-button text="Delete" (click)="onDelete()"></ui-button>
-      <ui-button text="Cancel" (click)="onClose()"></ui-button>
-    </div>
+<ui-modal (close)="onClose()">
+  <h4>Do you really want to delete claim?</h4>
+  <div class="delete-actions">
+    <ui-button text="Delete" (click)="onDelete()"></ui-button>
+    <ui-button text="Cancel" (click)="onClose()"></ui-button>
   </div>
-</div>
+</ui-modal>

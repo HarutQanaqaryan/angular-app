@@ -13,7 +13,11 @@ const routes: Routes = [
     component: LayoutComponent,
     children: [
       { path: '', redirectTo: 'login', pathMatch: 'full' },
-      { title: 'Login', path: 'login', component: LoginComponent },
+      {
+        title: 'Login',
+        path: 'login',
+        component: LoginComponent,
+      },
       { title: 'Register', path: 'register', component: RegisterComponent },
       {
         title: 'Claims',

@@ -1,14 +1,24 @@
 import { Injectable } from '@angular/core';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import { ActionTypes, IClaim, IColumn, StatusType } from 'app/models';
 import { mockData } from 'app/shared';
-import { AppState, changeClaims, setClaims } from 'app/states';
+import {
+  AppState,
+  editingClaims,
+  selectClaimsList,
+  setClaims,
+} from 'app/states';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ClaimsService {
-  constructor(private store: Store<AppState>) {}
+  claims?: IClaim[];
+  constructor(private store: Store<AppState>) {
+    this.store
+      .pipe(select(selectClaimsList))
+      .subscribe((value) => (this.claims = value));
+  }
 
   getAllClaims() {
     this.store.dispatch(setClaims({ claims: mockData }));
@@ -18,7 +28,7 @@ export class ClaimsService {
     const searchValue = (e.target as HTMLInputElement).value;
     type ObjectKey = keyof typeof element;
     const currentType = element.type as ObjectKey;
-    return mockData.filter((claim) =>
+    return this.claims?.filter((claim) =>
       claim[currentType]
         .toLowerCase()
         .includes((searchValue as string).toLowerCase())
@@ -27,29 +37,28 @@ export class ClaimsService {
 
   createClaim(
     title: string,
-    created: string,
+    created: string | null,
     type: ActionTypes,
-    status: StatusType,
     login: string,
     description: string
   ) {
     const updatedClaim = [
-      ...mockData,
+      ...this.claims as IClaim[],
       {
         id: Math.random(),
         title: title,
         created: created,
         type: type,
-        status: status,
+        status: StatusType.New,
         description: description,
         creator: login,
       },
     ];
-    this.store.dispatch(changeClaims({ newClaim: updatedClaim as IClaim[] }));
+    this.store.dispatch(editingClaims({ claims: updatedClaim as IClaim[] }));
   }
 
   editingClaim(currentClaim: IClaim, status: StatusType, description: string) {
-    const updatedClaim = mockData?.map((el) => {
+    const updatedClaim = this.claims?.map((el) => {
       if (currentClaim?.id === el.id) {
         return {
           ...el,
@@ -60,6 +69,12 @@ export class ClaimsService {
         return el;
       }
     });
-    this.store.dispatch(changeClaims({ newClaim: updatedClaim as IClaim[] }));
+    this.store.dispatch(editingClaims({ claims: updatedClaim as IClaim[] }));
+  }
+  deletingClaims(currentClaim?: IClaim) {
+    const updatedClaim = this.claims?.filter(
+      (el) => currentClaim?.id !== el.id
+    );
+    this.store.dispatch(editingClaims({ claims: updatedClaim as IClaim[] }));
   }
 }

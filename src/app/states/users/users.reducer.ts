@@ -4,8 +4,8 @@ import { logout, signIn } from './users.actions';
 import { createReducer, on } from '@ngrx/store';
 
 const usersInitialState: UserState = {
-  isSignIn: false,
-  user: void 0,
+  isSignIn: !!localStorage.getItem('USER') || false,
+  user: JSON.parse(localStorage.getItem('USER') as string) || void 0,
   error: void 0,
 };
 
@@ -16,6 +16,13 @@ export const usersReducer = createReducer(
       (el) => el.login === login && el.password === password
     );
     if (currUser) {
+      localStorage.setItem(
+        'USER',
+        JSON.stringify({
+          ...currUser,
+          password: btoa(password),
+        })
+      );
       return { ...state, user: currUser, error: void 0, isSignIn: true };
     } else {
       return {
