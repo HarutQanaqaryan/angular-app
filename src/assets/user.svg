@@ -1,18 +1,17 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- Written by Treer (gitlab.com/Treer) -->
-<svg 
-	version="1.1" 
-	xmlns="http://www.w3.org/2000/svg" 
-	xmlns:xlink="http://www.w3.org/1999/xlink" 
-	width="600" 
-	height="600"
-	stroke="black"
-	stroke-width="30"
-	fill="none">
-
-  <title>Abstract user icon</title>
-	
-  <circle cx="300" cy="300" r="265" />
-  <circle cx="300" cy="230" r="115" />	
-  <path d="M106.81863443903,481.4 a205,205 1 0,1 386.36273112194,0" stroke-linecap="butt" />
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+<svg
+  width="800px"
+  height="800px"
+  viewBox="0 0 24 24"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+>
+<circle cx="12" cy="6" r="4" stroke="#ADADAD" stroke-width="2" />
+<path
+    d="M19.9975 18C20 17.8358 20 17.669 20 17.5C20 15.0147 16.4183 13 12 13C7.58172 13 4 15.0147 4 17.5C4 19.9853 4 22 12 22C14.231 22 15.8398 21.8433 17 21.5634"
+    stroke="#ADADAD"
+    stroke-width="2"
+    stroke-linecap="round"
+  />
 </svg>

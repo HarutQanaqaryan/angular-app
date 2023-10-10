@@ -7,8 +7,8 @@
   <form [formGroup]="form" (ngSubmit)="signIn()" class="form">
     <ui-input
       label="Login"
-      placeholder="Type your e-mail"
-      icon="../assets/icon-mail.svg"
+      placeholder="Type your login"
+      icon="../assets/user.svg"
       formControlName="login"
       type="email"
       [isError]="submitted && login.errors?.required"
