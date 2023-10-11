@@ -18,7 +18,7 @@ export const user: IUser = {
 
 export const viewer: IUser = {
   firstName: 'Просмотр',
-  lastName: '',
+  lastName: 'Просмотров',
   login: 'viewer',
   password: 'viewerpass',
   role: [RollesEnum.VIEWER],

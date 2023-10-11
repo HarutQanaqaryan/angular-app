@@ -39,10 +39,6 @@ export class ClaimsComponent {
       .subscribe((value) => (this.currentUser = value));
   }
 
-  ngOnInit() {
-    this.claimsService.getAllClaims();
-  }
-
   setCurrentClaim(claim: IClaim, action: ActionTypes) {
     this.store.dispatch(setCurrentClaim({ currentClaim: claim }));
     switch (action) {

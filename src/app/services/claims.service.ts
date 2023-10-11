@@ -1,12 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { ActionTypes, IClaim, IColumn, StatusType } from 'app/models';
-import { mockData } from 'app/shared';
 import {
   AppState,
   editingClaims,
   selectClaimsList,
-  setClaims,
 } from 'app/states';
 
 @Injectable({
@@ -14,25 +12,30 @@ import {
 })
 export class ClaimsService {
   claims?: IClaim[];
+  searchValues: Map<any, string> = new Map();
   constructor(private store: Store<AppState>) {
     this.store
       .pipe(select(selectClaimsList))
       .subscribe((value) => (this.claims = value));
   }
 
-  getAllClaims() {
-    this.store.dispatch(setClaims({ claims: mockData }));
-  }
-
   searchClaim(e: Event, element: IColumn) {
-    const searchValue = (e.target as HTMLInputElement).value;
     type ObjectKey = keyof typeof element;
-    const currentType = element.type as ObjectKey;
-    return this.claims?.filter((claim) =>
-      claim[currentType]
-        .toLowerCase()
-        .includes((searchValue as string).toLowerCase())
-    );
+    const searchValue = (e.target as HTMLInputElement).value;
+    const filterKeys = Array.from(this.searchValues.keys());
+    let filteredClaims = this.claims;
+    this.searchValues.set(element.type as string, searchValue);
+
+    filterKeys.forEach((el) => {
+      const currentType = el as ObjectKey;
+      filteredClaims = filteredClaims?.filter((claim) =>
+        claim[currentType]
+          .toLowerCase()
+          .includes(this.searchValues.get(currentType)?.toLowerCase() as string)
+      );
+    });
+
+    return filteredClaims;
   }
 
   createClaim(
@@ -43,7 +46,7 @@ export class ClaimsService {
     description: string
   ) {
     const updatedClaim = [
-      ...this.claims as IClaim[],
+      ...(this.claims as IClaim[]),
       {
         id: Math.random(),
         title: title,

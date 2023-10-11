@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { IClaim } from 'app/models';
+import { getUserName } from 'app/shared';
 import { AppState, selectCurrentClaim } from 'app/states';
 
 @Component({
@@ -16,6 +17,9 @@ export class ViewingClaimComponent {
     this.store.pipe(select(selectCurrentClaim)).subscribe((value) => {
       this.currentClaim = value;
     });
+  }
+  getUser(login?: string) {
+    return getUserName(login as string);
   }
 
   onClose() {

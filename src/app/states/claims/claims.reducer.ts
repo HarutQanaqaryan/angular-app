@@ -6,9 +6,10 @@ import {
   setCurrentClaim,
 } from './claims.actions';
 import { ClaimsState } from 'app/models';
+import { mockData } from 'app/shared';
 
 const claimsInitialState: ClaimsState = {
-  claims: void 0,
+  claims: mockData,
   currentClaim: void 0,
 };
 
