@@ -31,15 +31,31 @@
         formControlName="password"
         class="register-input"
       ></ui-input>
+      <ui-input
+        placeholder="Type your password again"
+        label="PASSWORD AGAIN"
+        type="password"
+        formControlName="passwordAgain"
+        class="register-input"
+      ></ui-input>
       <div class="error" *ngIf="isUserAlreadyExist">
         This login is already in use
       </div>
+      <span *ngIf="isPasswordsNotEqual" class="error"
+        >Passwords are not equal</span
+      >
       <ui-button
         class="register-btn"
         text="Login"
         [isDisabled]="!form.valid"
       ></ui-button>
     </form>
+    <span className="sign_in">
+      Do you have an account?
+      <a class="login-user_request-register_link" [routerLink]="['/login']">
+        Sign in
+      </a>
+    </span>
   </div>
   <ui-loading *ngIf="loading" />
   <div *ngIf="isRegistered" class="registered-modal">

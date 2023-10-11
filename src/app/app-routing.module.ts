@@ -4,7 +4,7 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { ClaimsComponent } from './components/claims/claims.component';
 import { NotFoundComponent } from './components';
-import { AuthGuardService } from './services';
+import { AuthGuardService, RedirectService } from './services';
 import { LayoutComponent } from './components/layout';
 
 const routes: Routes = [
@@ -12,13 +12,19 @@ const routes: Routes = [
     path: '',
     component: LayoutComponent,
     children: [
-      { path: '', redirectTo: 'login', pathMatch: 'full' },
+      { path: '', redirectTo: 'claims', pathMatch: 'full' },
       {
         title: 'Login',
         path: 'login',
         component: LoginComponent,
+        canActivate: [RedirectService],
       },
-      { title: 'Register', path: 'register', component: RegisterComponent },
+      {
+        title: 'Register',
+        path: 'register',
+        component: RegisterComponent,
+        canActivate: [RedirectService],
+      },
       {
         title: 'Claims',
         path: 'claims',
