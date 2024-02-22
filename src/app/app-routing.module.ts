@@ -14,25 +14,25 @@ const routes: Routes = [
     children: [
       { path: '', redirectTo: 'claims', pathMatch: 'full' },
       {
-        title: 'Login',
+        title: 'Логин',
         path: 'login',
         component: LoginComponent,
         canActivate: [RedirectService],
       },
       {
-        title: 'Register',
+        title: 'Регистрация',
         path: 'register',
         component: RegisterComponent,
         canActivate: [RedirectService],
       },
       {
-        title: 'Claims',
+        title: 'Задачи',
         path: 'claims',
         component: ClaimsComponent,
         canActivate: [AuthGuardService],
       },
       {
-        title: 'Not Found',
+        title: 'Не найдено',
         path: '**',
         component: NotFoundComponent,
       },

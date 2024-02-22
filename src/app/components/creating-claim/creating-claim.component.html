@@ -2,19 +2,19 @@
   <form [formGroup]="form" (ngSubmit)="onSave()" class="form">
     <ui-input
       placeholder=""
-      label="Title"
+      label="ID задачи"
       formControlName="title"
       class="edit-input"
     ></ui-input>
     <ui-textarea
       placeholder=""
-      label="Description"
+      label="Описание"
       formControlName="description"
       class="edit-input"
     ></ui-textarea>
     <ui-select
       [defaultValue]="form.value.type"
-      label="Type"
+      label="Критичность"
       [options]="typeOptions"
       [(currentSelection)]="_type"
       (currentSelectionChange)="setType($event)"
@@ -24,7 +24,7 @@
     }}</span>
     <ui-button
       class="save-btn"
-      text="Save"
+      text="Сохранить"
       [isDisabled]="form.invalid"
     ></ui-button>
   </form>

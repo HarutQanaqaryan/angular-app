@@ -7,58 +7,58 @@
     />
     <form [formGroup]="form" (ngSubmit)="register()" class="form">
       <ui-input
-        placeholder="Type your first name"
-        label="FIRST NAME"
+        placeholder="Укажите своё имя"
+        label="ИМЯ"
         formControlName="firstname"
         class="register-input"
       ></ui-input>
       <ui-input
-        placeholder="Type your last name"
-        label="LAST NAME"
+        placeholder="Укажите свою фамилию"
+        label="ФАМИЛИЯ"
         formControlName="lastname"
         class="register-input"
       ></ui-input>
       <ui-input
-        placeholder="Type your login"
-        label="Login"
+        placeholder="Укажите свой логин"
+        label="Логин"
         formControlName="login"
         class="register-input"
       ></ui-input
       ><ui-input
-        placeholder="Type your password"
-        label="PASSWORD"
+        placeholder="Укажите своё пароль"
+        label="Пароль"
         type="password"
         formControlName="password"
         class="register-input"
       ></ui-input>
       <ui-input
-        placeholder="Type your password again"
-        label="PASSWORD AGAIN"
+        placeholder="Повторите своё пароль"
+        label="Пароль повторно"
         type="password"
         formControlName="passwordAgain"
         class="register-input"
       ></ui-input>
       <div class="error" *ngIf="isUserAlreadyExist">
-        This login is already in use
+        Такой логин уже зарегистрирован
       </div>
       <span *ngIf="isPasswordsNotEqual" class="error"
-        >Passwords are not equal</span
+        >Неверный пароль</span
       >
       <ui-button
         class="register-btn"
-        text="Login"
+        text="Логин"
         [isDisabled]="!form.valid"
       ></ui-button>
     </form>
     <span className="sign_in">
-      Do you have an account?
+      Уже зарегистророванны?
       <a class="login-user_request-register_link" [routerLink]="['/login']">
-        Sign in
+        Войти
       </a>
     </span>
   </div>
   <ui-loading *ngIf="loading" />
   <div *ngIf="isRegistered" class="registered-modal">
-    <span class="registered-message">You are registered</span>
+    <span class="registered-message">Вы зарегистрированны</span>
   </div>
 </div>

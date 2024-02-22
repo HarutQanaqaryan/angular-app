@@ -6,8 +6,8 @@
   />
   <form [formGroup]="form" (ngSubmit)="signIn()" class="form">
     <ui-input
-      label="Login"
-      placeholder="Type your login"
+      label="Логин"
+      placeholder="Введите свой логин"
       icon="../assets/user.svg"
       formControlName="login"
       type="email"
@@ -16,8 +16,8 @@
       errorMessage="Required field"
     />
     <ui-input
-      placeholder="Type your password"
-      label="PASSWORD"
+      placeholder="Введите пароль"
+      label="Пароль"
       icon="../assets/icon-lock.svg"
       formControlName="password"
       type="password"
@@ -28,15 +28,15 @@
     <span class="error" *ngIf="errorMessage">{{ errorMessage }}</span>
     <ui-button
       type="submit"
-      text="Login"
+      text="Логин"
       class="login-btn"
       [isDisabled]="!form.valid"
     />
   </form>
   <span className="login-user_request-register">
-    Not a member?
+    Новый пользоватедь?
     <a class="login-user_request-register_link" [routerLink]="['/register']">
-      Registration
+      Регистрация
     </a>
   </span>
 </div>

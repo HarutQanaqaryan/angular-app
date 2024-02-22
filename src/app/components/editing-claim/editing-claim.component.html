@@ -14,7 +14,7 @@
     </div>
     <ui-textarea
       placeholder=""
-      label="Description"
+      label="Описание"
       formControlName="description"
       class="edit-input"
       *ngIf="isAbleToEdit"
@@ -25,7 +25,7 @@
     </div>
     <ui-select
       [defaultValue]="form.value.status"
-      label="Status"
+      label="Статус"
       [options]="statusOptions"
       *ngIf="currentUser?.role?.includes(Rolles.ADMIN)"
       (currentSelectionChange)="setStatus($event)"
@@ -37,6 +37,6 @@
     <span class="error" *ngIf="errorMessage">{{
       errorMessage | titlecase
     }}</span>
-    <ui-button class="save-btn" text="Save"></ui-button>
+    <ui-button class="save-btn" text="Сохранить"></ui-button>
   </form>
 </ui-modal>
