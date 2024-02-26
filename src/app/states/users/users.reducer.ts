@@ -27,7 +27,7 @@ export const usersReducer = createReducer(
     } else {
       return {
         ...state,
-        error: 'Invalid login or password',
+        error: 'Неверный логин или пароль',
         user: void 0,
         isSignIn: false,
       };

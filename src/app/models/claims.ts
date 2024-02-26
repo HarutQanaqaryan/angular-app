@@ -1,15 +1,15 @@
 export enum ClaimType {
-  Hardware = 'Hardware',
-  Sofware = 'Software',
-  Troubleshooting = 'Troubleshooting',
-  Networking = 'Networking',
+  Hardware = 'Блокирующий',
+  Sofware = 'Критический',
+  Troubleshooting = 'Значительный',
+  Networking = 'Незначительный',
 }
 
 export enum StatusType {
-  Declined = 'Declined',
-  New = 'New',
-  Done = 'Done',
-  In_Progres = 'In progress',
+  Declined = 'Отклонен',
+  New = 'Новый',
+  Done = 'Выполнен',
+  In_Progres = 'В работе',
 }
 
 export interface IClaim {

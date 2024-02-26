@@ -1,7 +1,7 @@
 export const tableColumns = [
-  { title: 'Title', type: 'title' },
-  { title: 'Created', type: 'created' },
-  { title: 'Type', type: 'type' },
-  { title: 'Status', type: 'status' },
-  { title: 'Actions' },
+  { title: 'ID задачи', type: 'title' },
+  { title: 'Дате создания', type: 'created' },
+  { title: 'Критичности', type: 'type' },
+  { title: 'Статусу', type: 'status' },
+  { title: 'Действия' },
 ];

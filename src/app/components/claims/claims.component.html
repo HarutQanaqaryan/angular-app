@@ -1,8 +1,8 @@
 <div class="claims-page">
   <div class="claims-page_header">
-    <h2>Claims</h2>
+    <h2>Задачи</h2>
     <ui-button
-      text="Cleate claim"
+      text="Создать задачу"
       iconSrc="assets/icon-plus.svg"
       width="150px"
       (click)="isCreatingClaim = !isCreatingClaim"
@@ -17,11 +17,11 @@
             <th *ngFor="let element of columns">
               <div class="header-item">
                 <input
-                  [id]="element.type"
+                  [id]="element.title"
                   (input)="searchClaim($event, element)"
                   *ngIf="element !== columns.at(-1)"
                   class="search-input"
-                  placeholder="Search by {{ element.type | titlecase }}"
+                  placeholder="Поиск по {{ element.title }}"
                 />
                 <div class="actions" *ngIf="element === columns.at(-1)">
                   {{ element.title }}
