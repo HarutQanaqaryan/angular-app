@@ -1,6 +1,6 @@
 .navbar {
   width: 5vw;
-  background: linear-gradient(180deg, #d5eee2 0%, #7db59a 43.23%);
+  background: linear-gradient(185deg, #2A0156 0%, #150F1E 43.23%);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -27,7 +27,7 @@
   cursor: pointer;
 }
 .navbar-item_current {
-  border-left: 5px solid white;
+  border-left: 5px solid rgb(209, 148, 36);
 }
 
 .navbar-item-title {
@@ -36,7 +36,7 @@
   font-size: 16px;
   line-height: 20px;
   letter-spacing: 0.25px;
-  color: #ffffff;
+  color: #c21a1a;
 }
 
 .navbar-item_logo {
