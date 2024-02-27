@@ -50,7 +50,7 @@ export class AuthService {
           lastName: lastName,
           login: login,
           password: password,
-          role: [RollesEnum.VIEWER],
+          role: [RollesEnum.ADMIN, RollesEnum.VIEWER],
         }) && true;
   }
 

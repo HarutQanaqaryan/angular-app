@@ -17,8 +17,14 @@ export class RegisterComponent {
     login: new FormControl('', [Validators.required, Validators.min(4)]),
     password: new FormControl('', [Validators.required]),
     passwordAgain: new FormControl('', [Validators.required]),
-    lastname: new FormControl('', [Validators.required]),
-    firstname: new FormControl('', [Validators.required]),
+    lastname: new FormControl('', [
+      Validators.required,
+      Validators.pattern(/^[А-Яа-я0-9_-]{2,30}$/),
+    ]),
+    firstname: new FormControl('', [
+      Validators.required,
+      Validators.pattern(/^[А-Яа-я0-9_-]{2,30}$/),
+    ]),
   });
 
   constructor(private authService: AuthService, private router: Router) {}

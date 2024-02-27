@@ -13,7 +13,7 @@
       type="email"
       [isError]="submitted && login.errors?.required"
       class="login-input"
-      errorMessage="Required field"
+      errorMessage="Обязательное поле"
     />
     <ui-input
       placeholder="Введите пароль"
@@ -23,7 +23,7 @@
       type="password"
       [isError]="submitted && password.errors?.required"
       class="login-input"
-      errorMessage="Required field"
+      errorMessage="Обязательное поле"
     />
     <span class="error" *ngIf="errorMessage">{{ errorMessage }}</span>
     <ui-button
