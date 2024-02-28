@@ -11,12 +11,16 @@
         label="ИМЯ"
         formControlName="firstname"
         class="register-input"
+        [isError]="registerForm.firstname.errors?.pattern"
+        errorMessage="Разрешены только символы кириллицы от 2 до 30"
       ></ui-input>
       <ui-input
         placeholder="Укажите свою фамилию"
         label="ФАМИЛИЯ"
         formControlName="lastname"
         class="register-input"
+        [isError]="registerForm.lastname.errors?.pattern"
+        errorMessage="Разрешены только символы кириллицы от 2 до 30"
       ></ui-input>
       <ui-input
         placeholder="Укажите свой логин"
@@ -41,9 +45,7 @@
       <div class="error" *ngIf="isUserAlreadyExist">
         Такой логин уже зарегистрирован
       </div>
-      <span *ngIf="isPasswordsNotEqual" class="error"
-        >Неверный пароль</span
-      >
+      <span *ngIf="isPasswordsNotEqual" class="error">Неверный пароль</span>
       <ui-button
         class="register-btn"
         text="Логин"
